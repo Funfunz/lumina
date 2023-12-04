@@ -1,0 +1,50 @@
+{
+  "homeroot": {
+    "children": [
+      {
+        "id": "grid1",
+        "type": "grid",
+        "children": [
+          {
+            "id": "text1",
+            "type": "text",
+            "props": {
+              "text": "test 1"
+            }
+          },
+          {
+            "id": "text2",
+            "type": "text",
+            "props": {
+              "text": "test 2"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "mandim": {
+    "children": [
+      {
+        "id": "grid1",
+        "type": "grid",
+        "children": [
+          {
+            "id": "text1",
+            "type": "text",
+            "props": {
+              "text": "mandim 1"
+            }
+          },
+          {
+            "id": "text2",
+            "type": "text",
+            "props": {
+              "text": "mandim 2"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

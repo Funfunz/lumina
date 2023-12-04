@@ -1,0 +1,31 @@
+---
+interface Props {
+	href: string;
+	alt: string;
+}
+
+const { href, alt } = Astro.props;
+
+---
+
+<div class="imageContainer">
+	<img
+		class="image"
+		src={href}
+		alt={alt}
+	/>
+</div>
+
+<style>
+	.imageContainer {
+		max-width: 100%;
+		position: relative;
+	}
+	
+	.image {
+		max-width: 100%;
+		object-fit: cover;
+		height: 100%;
+	}
+
+</style>

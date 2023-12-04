@@ -1,0 +1,84 @@
+---
+import EditorInput from './EditorInput.astro'
+import { Icon } from 'astro-icon'
+
+interface Props {
+	id: string
+  open: string
+  elementProps?: {
+    [key: string]: {
+      value: unknown
+      friendlyName?: string
+    }
+  }
+}
+
+const {id, open, elementProps} = Astro.props
+
+const formId = 'form_' + id
+---
+<style>
+  dialog {
+    padding: 0;
+  }
+
+  dialog::backdrop {
+      background: rgba(169, 169, 169, 0.5);
+  }
+
+  .dialog-open {
+    width: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editor-form {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dialog-container {
+    padding: 16px;
+  }
+</style>
+<button class="dialog-open" onclick={`window.${id}.showModal()`}><Icon name="mdi:edit" /></button>
+
+<dialog id={id}>
+  <div data-dialog-container class="dialog-container">
+    Data editor
+    <form class="editor-form" id={formId}>
+      {Object.entries(elementProps).map(
+        (elementProp) => (
+          <EditorInput
+            name={elementProp[0]}
+            friendlyName={elementProp[1].friendlyName || elementProp[0]}
+            value={elementProp[1].value}
+          />
+        )
+      )}
+      <input type="submit" value="save"/>
+    </form>
+  </div>
+</dialog>
+
+<script define:vars={{formId, id}}>
+  let dialog = document.getElementById(id)
+  let form = document.forms[formId]
+
+  dialog.addEventListener('click', () => dialog.close())
+  const dialogContainers = document.querySelectorAll('[data-dialog-container]')
+  dialogContainers.forEach((dialogContainer) => {
+    dialogContainer.addEventListener('click', (event) => event.stopPropagation())
+  })
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const formData = new FormData(form)
+    const jsonData = Object.fromEntries(formData)
+    console.log(jsonData)
+    dialog.close()
+  })
+</script>

@@ -1,0 +1,30 @@
+---
+import EditorModal from './EditorModal.astro'
+
+interface Props {
+	text: string
+	edit?: boolean
+}
+
+const id = Math.floor(Math.random() * 10)
+
+const { text, edit } = Astro.props;
+
+const elementProps = {
+	text: {
+		friendlyName: 'Text',
+		value: text
+	}
+}
+
+---
+
+<div>{text}{edit && <EditorModal id={`dialog_${id}`} open="Open modal" elementProps={elementProps}/>}</div>
+
+<script>
+  import { text } from './exampleStore.ts';
+
+  text.subscribe((value) => {
+		
+	})
+</script>

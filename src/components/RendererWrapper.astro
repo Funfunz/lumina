@@ -1,0 +1,13 @@
+---
+import type { IComponentData, IPageData } from '../data/data';
+import Renderer from './Renderer.astro'
+
+interface Props {
+	data: IComponentData | IPageData;
+	edit?: boolean
+}
+
+const { data, edit } = Astro.props;
+---
+
+<Renderer data={data} edit={edit}/>
