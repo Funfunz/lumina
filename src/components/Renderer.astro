@@ -1,5 +1,5 @@
 ---
-import type { IComponentData, IPageData } from '../data/data';
+import type { IComponentData, IPageData } from '../data/data'
 import { getComponent } from '../helpers/componentLib'
 import RendererWrapper from './RendererWrapper.astro'
 
@@ -30,6 +30,10 @@ const toRender = (data: IComponentData[]) => {
 
 {toRender(data.children).map(
   ({Component, data}) => {
-    return <Component edit={edit} {...data.props}>{data.children && <RendererWrapper data={data} edit={edit}/>}</Component>
+    return (
+      <Component edit={edit} {...data.props}>
+        {data.children && <RendererWrapper data={data} edit={edit}/>}
+      </Component>
+    )
   }
 )}

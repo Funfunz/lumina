@@ -1,0 +1,25 @@
+dialog {
+  padding: 0;
+}
+
+dialog::backdrop {
+    background: rgba(169, 169, 169, 0.5);
+}
+
+.dialog-open {
+  width: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-form {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog-container {
+  padding: 16px;
+}

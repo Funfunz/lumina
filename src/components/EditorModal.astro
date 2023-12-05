@@ -4,7 +4,6 @@ import { Icon } from 'astro-icon'
 
 interface Props {
 	id: string
-  open: string
   elementProps?: {
     [key: string]: {
       value: unknown
@@ -13,7 +12,7 @@ interface Props {
   }
 }
 
-const {id, open, elementProps} = Astro.props
+const {id, elementProps} = Astro.props
 
 const formId = 'form_' + id
 ---
