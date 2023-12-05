@@ -10,37 +10,56 @@
             "type": "text",
             "props": {
               "text": "test 1"
-            }
+            },
+            "children": [
+              {
+                "id": "grid2",
+                "type": "grid",
+                "children": [
+                  {
+                    "id": "text4",
+                    "type": "text",
+                    "props": {
+                      "text": "test 1"
+                    }
+                  },
+                  {
+                    "id": "text5",
+                    "type": "text",
+                    "props": {
+                      "text": "test 2"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           {
-            "id": "text2",
+            "id": "text7",
             "type": "text",
             "props": {
               "text": "test 2"
             }
-          }
-        ]
-      }
-    ]
-  },
-  "mandim": {
-    "children": [
-      {
-        "id": "grid1",
-        "type": "grid",
-        "children": [
+          },
           {
-            "id": "text1",
+            "id": "text8",
             "type": "text",
             "props": {
-              "text": "mandim 1"
+              "text": "test 2"
             }
           },
           {
-            "id": "text2",
+            "id": "text9",
             "type": "text",
             "props": {
-              "text": "mandim 2"
+              "text": "test 2"
+            }
+          },
+          {
+            "id": "text10",
+            "type": "text",
+            "props": {
+              "text": "test 2"
             }
           }
         ]

@@ -1,13 +1,12 @@
 ---
 import type { IComponentData, IPageData } from '../data/data';
-import Renderer from './Renderer.astro'
+import AstroRenderer from './AstroRenderer.astro'
 
 interface Props {
-	data: IComponentData | IPageData;
+	data?: IComponentData | IPageData;
 	edit?: boolean
 }
 
 const { data, edit } = Astro.props;
 ---
-
-<Renderer data={data} edit={edit}/>
+{data && <AstroRenderer data={data} edit={edit}/>}

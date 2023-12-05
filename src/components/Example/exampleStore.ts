@@ -1,14 +1,10 @@
-import { atom } from 'nanostores'
+import { $data } from '../../store/main.ts'
+import { computed } from 'nanostores'
 
-export const data = atom<{[key:string]: {text: string}}>({})
-
-export function setText(id: string, text: string) {
-  data.set({
-    ...data.get(),
-    [id]: { text }
-  });
+export function setComponentData(id: string, data: Record<string, unknown>) {
+  $data.setKey(id, data)
 }
 
-export function getText(id: string) {
-  return data.get()[id].text
+export function getComponentData<T>(id: string) {
+  return computed($data, data => data[id] as T)
 }

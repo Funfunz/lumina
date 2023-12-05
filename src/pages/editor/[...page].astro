@@ -1,12 +1,6 @@
 ---
-import { loadComponent } from '../../helpers/componentLib'
 import {getPageData, getPages} from '../../helpers/dataFetcher'
-import Renderer from '../../components/Renderer.astro'
-import Example from '../../components/Example/Example.tsx'
-import Grid from '../../components/Grid.astro'
-
-loadComponent("text", Example)
-loadComponent("grid", Grid)
+import AstroRenderer from '../../components/AstroRenderer.astro'
 
 export async function getStaticPaths() {
   return (await getPages()).map(
@@ -18,5 +12,4 @@ const { page } = Astro.params;
 
 const pageData = await getPageData(page)
 ---
-
-<Renderer data={pageData} edit={true}/>
+<AstroRenderer data={pageData} edit={true}/>
