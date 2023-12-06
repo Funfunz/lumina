@@ -1,6 +1,4 @@
-import EditorInput from './EditorInput.astro'
 import './editorModal.css'
-import { useCallback } from 'react'
 
 interface Props {
 	name: string

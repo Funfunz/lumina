@@ -1,4 +1,8 @@
-# Astro Starter Kit: Basics
+# Lumina
+
+Lumina is an headless page builder framework
+
+The objective is to give an environment to the content managers that simplifies the creation of pages and components and also publish changes and manage versions ans history
 
 ```sh
 npm create astro@latest -- --template basics

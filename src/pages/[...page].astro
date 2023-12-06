@@ -1,16 +1,22 @@
 ---
-import {getPageData, getPages} from '../helpers/dataFetcher'
+import {getPageData, getPages, getPagesId} from '../helpers/dataFetcher'
 import AstroRenderer from '../components/AstroRenderer.astro'
+import { ViewTransitions } from 'astro:transitions'
+import Layout from '../layout/Layout.astro';
 
 export async function getStaticPaths() {
-  return (await getPages()).map(
+  return (await getPagesId()).map(
 		(page) => ({params: {page: page === "homeroot" ? undefined : page}})
 	)
 }
+
+const pages = await getPages()
 
 const { page } = Astro.params;
 
 const pageData = await getPageData(page)
 ---
-
-<AstroRenderer data={pageData} client:idle/>
+<ViewTransitions />
+<Layout data={pageData} pages={pages} selectedPage={page}>
+	<AstroRenderer data={pageData}/>
+</Layout>

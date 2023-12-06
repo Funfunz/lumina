@@ -20,7 +20,9 @@ export default function EditorModal({id, elementProps, setComponentData}: Props)
 
   const handleOnSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
     (e) => {
+      e.stopPropagation()
       e.preventDefault()
+      console.log('helelo')
       const formData = new FormData(e.currentTarget)
       const jsonData = Object.fromEntries(formData)
       setComponentData(id, jsonData)
