@@ -14,10 +14,12 @@ export default function Image({
 	src: initialSrc,
 	alt: initialAlt,
 	id,
+	friendlyName,
 	edit = false,
 	children
 }: TComponentData & {
 	id: string
+	friendlyName: string
 	edit: boolean
 	children: JSX.Element
 }) {

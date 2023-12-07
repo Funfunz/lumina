@@ -60,12 +60,28 @@
   outline-offset: 5px;
 }
 
-.editor-sidebar-content {
+.editor-sidebar .editor-sidebar-content {
   opacity: 0;
   transition-delay: 0.2s;
   transition: opacity 0.2s ease;
+  width: 300px;
 }
 
-.open .editor-sidebar-content {
+.editor-sidebar.open .editor-sidebar-content {
   opacity: 1;
+}
+
+.editor-sidebar ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  list-style: none;
+  padding-left: 20px;
+}
+
+.editor-sidebar ul li{
+  padding-top: 10px;
+}
+
+.editor-sidebar ul ul{
+  margin: 0;
 }

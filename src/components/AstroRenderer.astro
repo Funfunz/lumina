@@ -9,11 +9,11 @@ interface Props {
   edit?: boolean
 }
 
-const { data, edit } = Astro.props;
+const { data, edit } = Astro.props
 
 const toRender = (data: IComponentData[]) => {
   if (!data) return []
-  return data.map(
+  return data.sort((a, b) => (a.order - b.order)).map(
     (child) => {
       let Component = astroComponents[child.type]
       if (Component) {
@@ -25,7 +25,6 @@ const toRender = (data: IComponentData[]) => {
       }
 
       Component = reactComponents[child.type]
-      console.log(child.type)
       if (Component) {
         return {
           Component,
@@ -43,7 +42,6 @@ const toRender = (data: IComponentData[]) => {
 {data.children && toRender(data.children).map(
   ({Component, data, framework}) => {
     if (framework === 'react') {
-      data.type === 'image' && console.log({id: data.id}, {type: data.type}, {props: data.props})
       return (
         <ReactComponentLoader id={data.id} edit={edit} type={data.type} {...data.props} client:load>
           <AstroRendererWrapper data={data} edit={edit}/>

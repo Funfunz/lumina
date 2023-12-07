@@ -6,10 +6,14 @@
       {
         "id": "grid1",
         "type": "grid",
+        "friendlyName": "Grid",
+        "order": 0,
         "children": [
           {
             "id": "image1",
             "type": "image",
+            "friendlyName": "Image",
+            "order": 1,
             "props": {
               "src": "https://placehold.co/600x400",
               "alt": "some alt text"
@@ -18,6 +22,8 @@
           {
             "id": "text1",
             "type": "text",
+            "friendlyName": "Text",
+            "order": 0,
             "props": {
               "text": "test 1"
             },
@@ -25,10 +31,14 @@
               {
                 "id": "grid2",
                 "type": "grid",
+                "friendlyName": "Grid",
+                "order": 0,
                 "children": [
                   {
                     "id": "text4",
                     "type": "text",
+                    "friendlyName": "Text",
+                    "order": 0,
                     "props": {
                       "text": "test 1"
                     }
@@ -36,6 +46,8 @@
                   {
                     "id": "text5",
                     "type": "text",
+                    "friendlyName": "Text",
+                    "order": 1,
                     "props": {
                       "text": "test 2"
                     }
@@ -47,6 +59,8 @@
           {
             "id": "text7",
             "type": "text",
+            "friendlyName": "Text",
+            "order": 2,
             "props": {
               "text": "test 2"
             }
@@ -54,6 +68,8 @@
           {
             "id": "text8",
             "type": "text",
+            "friendlyName": "Text",
+            "order": 3,
             "props": {
               "text": "test 2"
             }
@@ -61,6 +77,8 @@
           {
             "id": "text9",
             "type": "text",
+            "friendlyName": "Text",
+            "order": 4,
             "props": {
               "text": "test 2"
             }
@@ -68,6 +86,8 @@
           {
             "id": "text10",
             "type": "text",
+            "friendlyName": "Text",
+            "order": 5,
             "props": {
               "text": "test 2"
             }

@@ -19,6 +19,6 @@ const { page } = Astro.params;
 const pageData = await getPageData(page)
 ---
 <ViewTransitions />
-<Layout edit={true} data={pageData} pages={pages} selectedPage={page}>
-	<AstroRenderer data={pageData} edit={true}/>
+<Layout edit={true} data={JSON.parse(JSON.stringify(pageData))} pages={pages} selectedPage={page}>
+	<AstroRenderer data={JSON.parse(JSON.stringify(pageData))} edit={true}/>
 </Layout>

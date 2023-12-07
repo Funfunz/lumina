@@ -9,7 +9,7 @@ export interface IPageInformation {
 }
 
 export async function getPageData(pageName: string) {
-  return (data as IData)[pageName || 'homeroot']
+  return JSON.parse(JSON.stringify((data as IData)[pageName || 'homeroot']))
 }
 
 export async function getPages() {
