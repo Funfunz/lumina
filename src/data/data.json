@@ -12,7 +12,7 @@
           {
             "id": "image1",
             "type": "image",
-            "friendlyName": "Image",
+            "friendlyName": "Image 1",
             "order": 1,
             "props": {
               "src": "https://placehold.co/600x400",
@@ -22,7 +22,7 @@
           {
             "id": "text1",
             "type": "text",
-            "friendlyName": "Text",
+            "friendlyName": "Text 1",
             "order": 0,
             "props": {
               "text": "test 1"
@@ -59,7 +59,7 @@
           {
             "id": "text7",
             "type": "text",
-            "friendlyName": "Text",
+            "friendlyName": "Text 7",
             "order": 2,
             "props": {
               "text": "test 2"
@@ -68,7 +68,7 @@
           {
             "id": "text8",
             "type": "text",
-            "friendlyName": "Text",
+            "friendlyName": "Text 8",
             "order": 3,
             "props": {
               "text": "test 2"
@@ -77,7 +77,7 @@
           {
             "id": "text9",
             "type": "text",
-            "friendlyName": "Text",
+            "friendlyName": "Text 9",
             "order": 4,
             "props": {
               "text": "test 2"
@@ -86,7 +86,7 @@
           {
             "id": "text10",
             "type": "text",
-            "friendlyName": "Text",
+            "friendlyName": "Text 10",
             "order": 5,
             "props": {
               "text": "test 2"

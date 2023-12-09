@@ -19,7 +19,7 @@ export function setPagesData(id: keyof IPagesData, data: any) {
   $pagesData.setKey(id, {
     ...currentData,
     ...data
-  });
+  })
 }
 
 export function getPagesData(id: keyof IPagesData) {

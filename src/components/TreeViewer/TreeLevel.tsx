@@ -1,8 +1,52 @@
 import { useCallback } from "react"
-import type { IComponentData } from "../../data/data"
+import type { IComponentData, IPageData } from "../../data/data"
+import { getPagesData, setPagesData } from "../../store/pagesData"
 
 interface Props {
   toRender: IComponentData[]
+}
+
+function updateComponentsOrder(pageData: IPageData | IComponentData, component: IComponentData, direction: 'up' | 'down') {
+  const currentOrder = component.order
+  const found = pageData.children.find(
+    (child) => {
+      return child.id === component.id
+    }
+  )
+  return {
+    ...pageData,
+    children: pageData.children.map(
+      (child) => {
+        if (found) {
+          if (child.id === component.id) {
+            if (direction === 'up') {
+              child.order--
+            } else {
+              child.order++
+            }
+          } else {
+            if (direction === 'up') {
+              if ((child.order + 1) == currentOrder && child.order < pageData.children.length) {
+                child.order++
+              }
+            } else {
+              if ((child.order - 1) === currentOrder && child.order > 0) {
+                child.order--
+              }
+            }
+          }
+          console.log(child)
+          return {...child}
+          
+        }
+        
+        if (child.children) {
+          return updateComponentsOrder(child, component, direction)
+        }
+        return child
+      }
+    )
+  }
 }
 
 export function TreeLevel({toRender}: Props) {
@@ -10,14 +54,14 @@ export function TreeLevel({toRender}: Props) {
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
-      alert(`moveUp, ${component.id}`)
+      setPagesData('pageData', updateComponentsOrder(getPagesData('pageData') as IPageData, component, 'up'))
     }, [parent]
   )
   const handleMoveDownClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
-      alert(`moveDown, ${component.id}`)
+      setPagesData('pageData', updateComponentsOrder(getPagesData('pageData') as IPageData, component, 'down'))
     }, [parent]
   )
   const handleCreateClick = useCallback(
