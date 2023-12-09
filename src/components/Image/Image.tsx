@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import EditorModal from '../Editor/EditorModal.js'
 import { useStore } from '@nanostores/react'
 import { getComponentData } from './ImageStore.js'
-import { setComponentData } from '../../store/main.js'
+import { setComponentData } from '../../store/componentData.js'
 import './Image.css'
 
 export type TComponentData = {

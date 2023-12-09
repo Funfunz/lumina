@@ -1,17 +1,12 @@
 ---
-import type { IPageData } from '../data/data'
 import TreeViewer from '../components/TreeViewer/TreeVIewer'
 import './Layout.css'
-import type { IPageInformation } from '../helpers/dataFetcher'
 
 interface Props {
-  data: IPageData
-  pages: IPageInformation
-  selectedPage: string
   edit?: boolean
 }
 
-const { edit, data, pages, selectedPage } = Astro.props
+const { edit } = Astro.props
 
 const bodyClassList = ['global'];
 
@@ -27,7 +22,7 @@ if (edit) {
   </head>
   <body class={bodyClassList.join(' ')}>
     {edit && (
-      <TreeViewer data={data} pages={pages} selectedPage={selectedPage} client:load/>
+      <TreeViewer client:load/>
     )}
     <div class='main-lumina-content'>
       <slot/>
@@ -36,7 +31,7 @@ if (edit) {
 </html>
 
 <script>
-  import { $backofficeLayout } from '../store/main.ts';
+  import { $backofficeLayout } from '../store/backofficeLayout.ts';
 
   $backofficeLayout.subscribe(layout => {
     layout.menu.open ? document.body.classList.add('open') : document.body.classList.remove('open')

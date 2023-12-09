@@ -1,4 +1,4 @@
-import { $backofficeLayout } from '../../store/main.ts'
+import { $backofficeLayout } from '../../store/backofficeLayout.ts'
 import { computed } from 'nanostores'
 
 export function getBackofficeLayout<T>(id: string) {

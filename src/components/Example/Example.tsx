@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import EditorModal from '../Editor/EditorModal.tsx'
 import { useStore } from '@nanostores/react'
 import { getComponentData } from './exampleStore.ts'
-import { setComponentData } from '../../store/main.ts'
+import { setComponentData } from '../../store/componentData.ts'
 
 export type TComponentData = {
 	text: string

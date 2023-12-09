@@ -1,4 +1,4 @@
-import { $data } from '../../store/main.ts'
+import { $data } from '../../store/componentData.ts'
 import { computed } from 'nanostores'
 
 export function getComponentData<T>(id: string) {

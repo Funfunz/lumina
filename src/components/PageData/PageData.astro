@@ -1,0 +1,25 @@
+---
+import type { IPageData } from '../../data/data'
+import type { IPageInformation } from '../../helpers/dataFetcher'
+
+interface Props {
+	pageData: IPageData
+  page: string
+	pages: IPageInformation
+  edit?: boolean
+}
+
+const { pageData, page, pages } = Astro.props
+---
+
+<data data-pages-data data-page-data={JSON.stringify(pageData)} data-selected-page={page} data-pages={JSON.stringify(pages)}/>
+
+<script>
+	import { setPagesData } from '../../store/pagesData'
+	const data: HTMLElement | null = document.querySelector('[data-pages-data]')
+	if (data) {
+		setPagesData('pageData', JSON.parse(data.dataset.pageData || ''))
+		setPagesData('selectedPage', data.dataset.selectedPage || '')
+		setPagesData('pages', JSON.parse(data.dataset.pages || ''))
+	}
+</script>
