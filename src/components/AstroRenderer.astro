@@ -2,6 +2,7 @@
 import type { IComponentData, IPageData } from '../data/data'
 import AstroRendererWrapper from './AstroRendererWrapper.astro'
 import ReactComponentLoader from './ReactComponentLoader'
+import ReactRenderer from './ReactRenderer'
 import { astroComponents, reactComponents } from './components'
 
 interface Props {
@@ -13,7 +14,7 @@ const { data, edit } = Astro.props
 
 const toRender = (data: IComponentData[]) => {
   if (!data) return []
-  return data.sort((a, b) => (a.order - b.order)).map(
+  return data.map(
     (child) => {
       let Component = astroComponents[child.type]
       if (Component) {
@@ -39,19 +40,25 @@ const toRender = (data: IComponentData[]) => {
 
 ---
 <div style="position: fixed; top: 0; left: 0"></div>
-{data.children && toRender(data.children).map(
-  ({Component, data, framework}) => {
-    if (framework === 'react') {
-      return (
-        <ReactComponentLoader id={data.id} edit={edit} type={data.type} {...data.props} client:load>
-          <AstroRendererWrapper data={data} edit={edit}/>
-        </ReactComponentLoader>
-      )
-    }
-    return (
-      <Component edit={edit} {...data.props}>
-        <AstroRendererWrapper data={data} edit={edit}/>
-      </Component>
-    )
-  }
+{data.children && (
+  <ReactRenderer id={(data as IComponentData)?.id} client:load>
+    {...toRender(data.children).map(
+      ({Component, data, framework}) => {
+        if (framework === 'react') {
+          return (
+            <slotter slot={'slot_' + data.id}>
+              <ReactComponentLoader id={data.id} edit={edit} type={data.type} {...data.props} client:load>
+                <AstroRendererWrapper data={data} edit={edit}/>
+              </ReactComponentLoader>
+            </slotter>
+          )
+        }
+        return (
+          <Component edit={edit} slot={'slot_' + data.id} {...data.props}>
+            <AstroRendererWrapper data={data} edit={edit}/>
+          </Component>
+        )
+      }
+    )}
+    </ReactRenderer>
 )}

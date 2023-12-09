@@ -15,9 +15,11 @@ export default function Image({
 	alt: initialAlt,
 	id,
 	friendlyName,
+	sayHello,
 	edit = false,
 	children
 }: TComponentData & {
+	sayHello: string
 	id: string
 	friendlyName: string
 	edit: boolean
@@ -38,7 +40,6 @@ export default function Image({
 			value: componentData?.alt || initialAlt
 		}
 	}
-
 	return (
 		<div>
 			<img className='custom-image' src={componentData?.src || initialSrc} alt={componentData?.alt || initialAlt}/>

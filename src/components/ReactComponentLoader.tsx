@@ -4,6 +4,7 @@ export type Props = {
 	id: string
   edit?: boolean
 	type: string
+	children: JSX.Element
 	[key: string]: any
 }
 

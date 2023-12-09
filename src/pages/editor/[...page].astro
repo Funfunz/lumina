@@ -4,7 +4,6 @@ import AstroRenderer from '../../components/AstroRenderer.astro'
 import Layout from '../../layout/Layout.astro'
 import PageData from '../../components/PageData/PageData.astro'
 import { ViewTransitions } from 'astro:transitions'
-import ReactRendererWrapper from '../../components/ReactRendererWrapper/ReactRendererWrapper'
 
 export async function getStaticPaths() {
   return (await getPagesId()).map(
@@ -20,9 +19,7 @@ const pageData = await getPageData(page)
 ---
 <ViewTransitions />
 <Layout edit={true}>
-	<ReactRendererWrapper client:load>
-		<AstroRenderer data={JSON.parse(JSON.stringify(pageData))} edit={true}/>
-	</ReactRendererWrapper>
+	<AstroRenderer data={JSON.parse(JSON.stringify(pageData))} edit={true}/>
 </Layout>
 
 <PageData page={page} pageData={pageData} pages={pages}/>
