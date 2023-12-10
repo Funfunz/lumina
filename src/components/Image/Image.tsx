@@ -15,11 +15,9 @@ export default function Image({
 	alt: initialAlt,
 	id,
 	friendlyName,
-	sayHello,
 	edit = false,
 	children
 }: TComponentData & {
-	sayHello: string
 	id: string
 	friendlyName: string
 	edit: boolean
@@ -42,7 +40,7 @@ export default function Image({
 	}
 	return (
 		<div>
-			<img className='custom-image' src={componentData?.src || initialSrc} alt={componentData?.alt || initialAlt}/>
+			<img className='custom-image' src={componentData?.src || initialSrc || 'https://placehold.co/600x400'} alt={componentData?.alt || initialAlt}/>
 			{edit && <EditorModal id={id} elementProps={elementProps} setComponentData={setComponentData} />}
 			{children}
 		</div>

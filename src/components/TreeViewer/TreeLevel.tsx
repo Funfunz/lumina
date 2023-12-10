@@ -1,6 +1,10 @@
-import { useCallback } from "react"
+import { useCallback, useRef, useState } from "react"
 import type { IComponentData, IPageData } from "../../data/data"
 import { getPagesData, setPagesData } from "../../store/pagesData"
+import { reactComponents, astroComponents } from "../components"
+import './TreeLevel.css'
+import { TreeLevelDialog } from "./TreeLevelDialog"
+
 
 interface Props {
   toRender: IComponentData[]
@@ -50,6 +54,9 @@ function updateComponentsOrder(pageData: IPageData | IComponentData, component: 
 }
 
 export function TreeLevel({toRender}: Props) {
+  
+  const [isOpen, setIsOpen] = useState<Record<string, boolean>>({})
+
   const handleMoveUpClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
@@ -68,7 +75,14 @@ export function TreeLevel({toRender}: Props) {
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
-      alert(`create, ${component.id}`)
+      setIsOpen(
+        (isOpen) => {
+          return {
+            ...isOpen,
+            [component.id]: !isOpen[component.id]
+          }
+        }
+      )
     }, [parent]
   )
   const handleEditClick = useCallback(
@@ -97,6 +111,7 @@ export function TreeLevel({toRender}: Props) {
           <button onClick={handleEditClick(component)} className="button-edit">&#9998;</button>
           <button onClick={handleDeleteClick(component)}>X</button>
           {component.children && (<TreeLevel toRender={component.children}/>)}
+          <TreeLevelDialog id={component.id} open={isOpen[component.id]} friendlyName={component.friendlyName}/>
         </li>
       ))}
     </ul>

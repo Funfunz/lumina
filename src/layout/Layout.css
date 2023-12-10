@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  outline: 1px solid black;
 }
 
 .global {
@@ -27,12 +26,13 @@
 
 .editable .main-lumina-content{
   max-width: calc(100% - 48px);
+  outline: 1px solid black;
+}
+
+.editable .main-lumina-content * {
+  outline: 1px solid black;
 }
 
 .editable.open .main-lumina-content{
   max-width: calc(100% - 300px);
-}
-
-slotter {
-  display: contents;
 }

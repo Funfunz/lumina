@@ -1,9 +1,10 @@
 ---
-import type { IComponentData, IPageData } from '../data/data'
+import type { IComponentData, IPageData } from '../../data/data'
 import AstroRendererWrapper from './AstroRendererWrapper.astro'
-import ReactComponentLoader from './ReactComponentLoader'
-import ReactRenderer from './ReactRenderer'
-import { astroComponents, reactComponents } from './components'
+import ReactComponentLoader from '../ReactComponentLoader'
+import ReactRenderer from '../ReactRenderer'
+import { astroComponents, reactComponents } from '../components'
+import './AstroRenderer.css'
 
 interface Props {
 	data: IComponentData | IPageData

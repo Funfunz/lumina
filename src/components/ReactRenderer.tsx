@@ -28,7 +28,6 @@ export default function ReactRenderer({id, ...rest}: TProps) {
   const pagesData = useStore($pagesData)
   useEffect(
     () => {
-      console.log({id, pagesData})
       if (!id) {
         setOrder(pagesData.pageData.children.sort(
           (a, b) => a.order - b.order 
@@ -50,9 +49,6 @@ export default function ReactRenderer({id, ...rest}: TProps) {
       }
     }, [pagesData]
   )
-  console.log({
-    id, order , rest, "slot_grid1": rest.slot_grid1
-  })
 	return (
     <>
       {order.map(
