@@ -16,10 +16,12 @@ const pages = await getPages()
 const { page } = Astro.params
 
 const pageData = await getPageData(page)
+
 ---
+<PageData page={page} pageData={pageData} pages={pages}/>
 <ViewTransitions />
 <Layout edit={true}>
-	<AstroRenderer data={JSON.parse(JSON.stringify(pageData))} edit={true}/>
+	<AstroRenderer initial={true} data={JSON.parse(JSON.stringify(pageData))} edit={true}/>
 </Layout>
 
-<PageData page={page} pageData={pageData} pages={pages}/>
+

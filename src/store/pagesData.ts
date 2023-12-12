@@ -42,8 +42,7 @@ function findAndAddComponent(currentTreeLevel: IPageData | IComponentData, compo
   return currentTreeLevel.children.find((
     (component) => {
       if (component.id === parentId) {
-        console.log({currentTreeLevel, componentid:component.id, parentId})
-        component.children.push(newComponentFactory(componentData, currentTreeLevel.children))
+        component.children.push(newComponentFactory(componentData, component.children))
         return true
       }
       if (component.children.length) {
@@ -57,7 +56,6 @@ function findAndAddComponent(currentTreeLevel: IPageData | IComponentData, compo
 export function addComponent(componentData: INewComponentData, parentId?: string) {
   let result: unknown = false
   const currentPagesData = getPagesData('pageData') as IPageData
-  console.log({parentId, currentPagesData})
   if (parentId === undefined) {
     result = currentPagesData.children.push(newComponentFactory(componentData, currentPagesData.children))
     

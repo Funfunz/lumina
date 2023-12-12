@@ -30,10 +30,6 @@ export const TreeLevelDialog = ({ friendlyName, id, open }: Props) => {
 
   const handleSaveClick = useCallback(
     () => {
-      console.log({
-        friendlyName: inputRef.current.value,
-        type: selectRef.current.selectedOptions[0]
-      })
       addComponent({
         friendlyName: inputRef.current.value,
         type: selectRef.current.selectedOptions[0].value
@@ -55,7 +51,7 @@ export const TreeLevelDialog = ({ friendlyName, id, open }: Props) => {
           Select a component
           <select ref={selectRef} name="component" id="component">
             {[...Object.keys(reactComponents), ...Object.keys(astroComponents)].sort().map(
-              (componentName) => (<option value={componentName}>{componentName}</option>)
+              (componentName, index) => (<option key={componentName + index}value={componentName}>{componentName}</option>)
             )}
           </select>
         </label>

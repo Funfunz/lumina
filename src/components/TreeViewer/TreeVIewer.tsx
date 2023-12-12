@@ -38,8 +38,8 @@ export default function TreeViewer() {
           </div>
           <ul>
             {pagesData.pages && Object.entries(pagesData.pages).map(
-              ([pageId, pageInformation]) => (
-                <li className={isHomePageSelected || pagesData.selectedPage === pageId ? 'selected' : ''}>
+              ([pageId, pageInformation], index) => (
+                <li key={`${pageId}-${index}`} className={isHomePageSelected || pagesData.selectedPage === pageId ? 'selected' : ''}>
                   {pageInformation.backofficeName} - <button className="button-edit">&#9998;</button><button>X</button>
                 </li>
               )
@@ -53,7 +53,7 @@ export default function TreeViewer() {
           <div className="title">
             Components
           </div>
-          {pagesData.pageData?.children && (<TreeLevel toRender={pagesData.pageData.children}/>)}
+          <TreeLevel toRender={pagesData.pageData?.children}/>
           <div className="action-bar">
             <button>+</button>
           </div>

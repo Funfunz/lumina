@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const pages = await getPages()
 
-const { page } = Astro.params;
+const { page } = Astro.params
 
 const pageData = await getPageData(page)
 

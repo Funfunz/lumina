@@ -9,4 +9,5 @@ interface Props {
 
 const { data, edit } = Astro.props;
 ---
+<div style="position: fixed; top: 0; left: 0"></div>
 {data && <AstroRenderer data={data} edit={edit}/>}

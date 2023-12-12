@@ -1,13 +1,12 @@
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useState } from "react"
 import type { IComponentData, IPageData } from "../../data/data"
 import { getPagesData, setPagesData } from "../../store/pagesData"
-import { reactComponents, astroComponents } from "../components"
 import './TreeLevel.css'
 import { TreeLevelDialog } from "./TreeLevelDialog"
 
 
 interface Props {
-  toRender: IComponentData[]
+  toRender?: IComponentData[]
 }
 
 function updateComponentsOrder(pageData: IPageData | IComponentData, component: IComponentData, direction: 'up' | 'down') {
@@ -39,7 +38,6 @@ function updateComponentsOrder(pageData: IPageData | IComponentData, component: 
               }
             }
           }
-          console.log(child)
           return {...child}
           
         }
@@ -62,14 +60,14 @@ export function TreeLevel({toRender}: Props) {
       e.preventDefault()
       e.stopPropagation()
       setPagesData('pageData', updateComponentsOrder(getPagesData('pageData') as IPageData, component, 'up'))
-    }, [parent]
+    }, []
   )
   const handleMoveDownClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
       setPagesData('pageData', updateComponentsOrder(getPagesData('pageData') as IPageData, component, 'down'))
-    }, [parent]
+    }, []
   )
   const handleCreateClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
@@ -83,28 +81,32 @@ export function TreeLevel({toRender}: Props) {
           }
         }
       )
-    }, [parent]
+    }, []
   )
   const handleEditClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
       alert(`edit, ${component.id}`)
-    }, [parent]
+    }, []
   )
   const handleDeleteClick = useCallback(
     (component: IComponentData): React.MouseEventHandler<HTMLButtonElement> => (e) => {
       e.preventDefault()
       e.stopPropagation()
       alert(`delete, ${component.id}`)
-    }, [parent]
+    }, []
   )
+
+  if (!toRender?.length) {
+    return
+  }
   return (
     <ul>
       {toRender.sort((a, b) => {
         return a.order - b.order
       }).map((component, index) => (
-        <li>
+        <li key={`${component.id}-${index}`}>
           {component.friendlyName} - {(index > 0) ? (<button onClick={handleMoveUpClick(component)} className="button-arrow-up">&#8593;</button>) : undefined}
           {(index + 1 < toRender.length) ? (<button onClick={handleMoveDownClick(component)} className="button-arrow-down">&#8595;</button>) : undefined}
           <button onClick={handleCreateClick(component)}>+</button>

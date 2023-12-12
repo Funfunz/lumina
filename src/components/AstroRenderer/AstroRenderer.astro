@@ -9,9 +9,10 @@ import './AstroRenderer.css'
 interface Props {
 	data: IComponentData | IPageData
   edit?: boolean
+  initial?: boolean
 }
 
-const { data, edit } = Astro.props
+const { data, edit, initial } = Astro.props
 
 const toRender = (data: IComponentData[]) => {
   if (!data) return []
@@ -39,27 +40,66 @@ const toRender = (data: IComponentData[]) => {
   ).filter(e => e)
 }
 
+const initialComponentsRender = () => {
+  return (initial && [
+    ...Object.keys(astroComponents).map(
+      (type) => {
+        let Component = astroComponents[type]
+        return {
+          Component,
+          type,
+          framework: 'astro',
+        }
+      }
+    ),
+    ...Object.keys(reactComponents).map(
+      (type) => {
+        const Component = reactComponents[type]
+        return {
+          Component,
+          type,
+          framework: 'react',
+        }
+      }
+    )
+  ]) || []
+}
+
 ---
 <div style="position: fixed; top: 0; left: 0"></div>
 {data.children && (
-  <ReactRenderer id={(data as IComponentData)?.id} client:load>
+  <ReactRenderer initial={initial} id={(data as IComponentData)?.id} client:load>
+    {...initialComponentsRender().map(
+      ({Component, type, framework}) => {
+        if (framework === 'react') {
+          return (
+            <slotter slot={'slot_react_' + type}>
+              <ReactComponentLoader key={'slot_react_' + type} id={type} edit={edit} type={type} client:load/>
+            </slotter>
+          )
+        }
+        return (
+          <Component edit={edit} key={'slot_astro_' + type} slot={'slot_astro_' + type}/>
+        )
+      }
+    )}
     {...toRender(data.children).map(
       ({Component, data, framework}) => {
         if (framework === 'react') {
           return (
             <slotter slot={'slot_' + data.id}>
-              <ReactComponentLoader id={data.id} edit={edit} type={data.type} {...data.props} client:load>
+              <ReactComponentLoader key={data.id} id={data.id} edit={edit} type={data.type} {...data.props} client:load>
                 <AstroRendererWrapper data={data} edit={edit}/>
               </ReactComponentLoader>
             </slotter>
           )
         }
         return (
-          <Component edit={edit} slot={'slot_' + data.id} {...data.props}>
+          <Component edit={edit} key={data.id} slot={'slot_' + data.id} {...data.props}>
             <AstroRendererWrapper data={data} edit={edit}/>
           </Component>
         )
       }
     )}
-    </ReactRenderer>
+  </ReactRenderer>
 )}
